@@ -44,6 +44,7 @@ services:
     environment:
       - OMNIVOICE_PORT=3900
       - VOICESTUDIO_UI_PORT=3901
+      - BASE44_DEV_DISABLE_CSP=1
       - __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
     command: ["sh", "-ec", "bun install --frozen-lockfile && cd electron && exec bunx vite --config vite.web.config.ts --host 0.0.0.0"]
     network_mode: "service:api"
