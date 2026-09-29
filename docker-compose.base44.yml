@@ -48,7 +48,8 @@ services:
     command: ["sh", "-ec", "bun install --frozen-lockfile && cd electron && exec bunx vite --config vite.web.config.ts --host 0.0.0.0"]
     network_mode: "service:api"
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "bun -e \"const r=await fetch('http://127.0.0.1:3901/');process.exit(r.ok?0:1)\" || (echo frontend failed; exit 1)"]
       interval: 15s
