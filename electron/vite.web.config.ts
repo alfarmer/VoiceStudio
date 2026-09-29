@@ -14,6 +14,12 @@ export default defineConfig({
   root,
   publicDir: resolve(import.meta.dirname, 'public'),
   plugins: [
+    // Base44 sandbox only: the strict meta CSP blocks the preview host's bridge script.
+    process.env.BASE44_DEV_DISABLE_CSP === '1' && {
+      name: 'base44-dev-strip-csp',
+      apply: 'serve',
+      transformIndexHtml: (html: string) => html.replace(/<meta\s+http-equiv="Content-Security-Policy"[\s\S]*?\/>/i, ''),
+    },
     react(),
     tailwindcss(),
     {

@@ -66,3 +66,8 @@ The five canonical roles, each label string equal to its name. See `docs/agents/
 ### Domain docs
 
 Single-context: `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+
+## Base44 sandbox
+- `docker compose -f docker-compose.base44.yml up -d`: `api` (uv, CPU, uvicorn --reload on 3900) + `web` (Vite web renderer on 3901, host port 3000). `web` shares `api`'s network namespace so the Vite proxy to 127.0.0.1:3900 works; host ports live on `api`.
+- First boot runs `uv sync --frozen` (CUDA torch wheels, several GB), about 8 min. Vite proxy ECONNREFUSED errors before that finishes are expected.
+- Verify with `curl localhost:3000/api/health` → `{"status":"ok","device":"cpu"}`. There's no GPU, so models run on CPU.

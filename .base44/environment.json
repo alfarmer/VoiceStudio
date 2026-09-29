@@ -1,0 +1,6 @@
+{"previewPort": 3000, "healthPath": "/", "startCommand": "docker compose -f docker-compose.base44.yml up -d", "secrets": [
+ {"name": "HF_TOKEN", "description": "Optional Hugging Face token for gated model downloads (huggingface.co/settings/tokens)", "requiredAtBoot": false},
+ {"name": "OPENAI_API_KEY", "description": "Optional, for OpenAI-backed features", "requiredAtBoot": false},
+ {"name": "ELEVENLABS_API_KEY", "description": "Optional ElevenLabs engine", "requiredAtBoot": false},
+ {"name": "DEEPL_API_KEY", "description": "Optional DeepL translation", "requiredAtBoot": false}
+]}
